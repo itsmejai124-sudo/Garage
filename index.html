@@ -109,6 +109,9 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 /* ── FOOTER ── */
 footer{text-align:center;padding:2.5rem;border-top:1px solid rgba(255,255,255,.06);color:var(--sub);font-size:.85rem;margin-top:3rem}
 footer span{color:var(--gold)}
+.btn-direction{display:inline-flex;align-items:center;gap:.5rem;margin-top:1rem;padding:.6rem 1.2rem;background:rgba(245,166,35,.1);border:1px solid var(--gold);color:var(--gold);border-radius:8px;text-decoration:none;font-weight:600;font-size:.9rem;transition:all .3s}
+.btn-direction:hover{background:var(--gold);color:#000}
+
 
 /* ── FLOATING CARS ── */
 .floating-car{position:fixed;bottom:-80px;font-size:3rem;animation:driveCar linear infinite;opacity:.08;pointer-events:none;z-index:0}
@@ -146,7 +149,8 @@ footer span{color:var(--gold)}
 <section class="hero">
   <div class="hero-badge">🏆 BEST IN FIELD · SINCE 2009</div>
   <h1>Your Vehicle Deserves<br><span>Expert Hands</span></h1>
-  <p>Ajay Auto Garage — 15+ years of trusted vehicle repair, maintenance & restoration. We treat every car like our own.</p>
+  <p>Ajay Auto Garage — Serving you with 15+ years of trust. Expert vehicle repair, maintenance & restoration by Ajay Pandey.</p>
+
   <div class="btn-group">
     <button class="btn btn-gold" onclick="scrollTo('#appointment')">Book Appointment</button>
     <button class="btn btn-outline" onclick="scrollTo('#status')">Check Availability</button>
@@ -269,23 +273,30 @@ footer span{color:var(--gold)}
   <div class="contact-bar">
     <div class="contact-item">
       <div class="contact-icon">📞</div>
-      <div class="contact-info"><h4>Call Us</h4><p>+91 98765 43210<br>+91 91234 56789</p></div>
+      <div class="contact-info"><h4>Call Us</h4><p>+91 73985 11081</p></div>
     </div>
+
     <div class="contact-item">
       <div class="contact-icon">📍</div>
-      <div class="contact-info"><h4>Location</h4><p>Shop No. 12, Main Market Road<br>Near Bus Stand, Your City</p></div>
+      <div class="contact-info">
+        <h4>Location</h4>
+        <p>Indralok Phase 4, Near Police Chowki<br>Pincode: 401104</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Indralok+Phase+4+near+Police+Chowki+401104" target="_blank" class="btn-direction">📍 Get Directions</a>
+      </div>
     </div>
     <div class="contact-item">
       <div class="contact-icon">🕐</div>
       <div class="contact-info"><h4>Working Hours</h4><p>Mon – Sat: 8:00 AM – 8:00 PM<br>Sunday: 9:00 AM – 3:00 PM</p></div>
     </div>
+
   </div>
 </div>
 
 <footer>
   <div style="font-size:1.5rem;font-weight:900;color:var(--gold);margin-bottom:.5rem">⚙️ AJAY AUTO GARAGE</div>
-  <p>© 2024 Ajay Auto Garage. Serving with <span>❤️</span> since <span>2009</span>.</p>
-  <p style="margin-top:.5rem">Best Vehicle Service Center · 15+ Years of Trust</p>
+  <p>© 2024 Ajay Auto Garage. Managed by <span>Ajay Pandey</span>. Serving since <span>2009</span>.</p>
+  <p style="margin-top:.5rem">Indralok Phase 4, Near Police Chowki, 401104</p>
+
 </footer>
 
 <!-- TOAST -->
@@ -361,9 +372,10 @@ function submitForm(e){
 
   // Show toast notification
   const toast=document.getElementById('toast');
-  document.getElementById('toastBody').textContent=`${name} | ${phone} | ${brand}${date?' | '+date:''}`;
+  document.getElementById('toastBody').textContent=`Enquiry from ${name}: ${issue || 'General Service'} (${phone})`;
   toast.style.display='block';
-  setTimeout(()=>{toast.style.display='none'},5000);
+  setTimeout(()=>{toast.style.display='none'},8000);
+
 
   // Request browser notification permission
   if('Notification' in window){
