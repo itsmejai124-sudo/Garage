@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ajay Auto Garage – Trusted Vehicle Experts Since 2009</title>
+<meta name="description" content="Ajay Auto Garage – 15+ years of trusted vehicle repair. Book an appointment, check live car status, and get expert care for your vehicle.">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#f5a623;--dark:#0a0a0f;--card:#13131f;--accent:#ff6b35;--text:#e8e8f0;--sub:#9999bb}
+body{font-family:'Outfit',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden}
+
+/* ── SPLASH ── */
+#splash{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--dark);transition:opacity .8s ease}
+#splash.hide{opacity:0;pointer-events:none}
+.splash-logo{font-size:clamp(2rem,6vw,4.5rem);font-weight:900;color:var(--gold);letter-spacing:4px;animation:pulse 1.5s ease infinite alternate}
+.splash-tagline{font-size:1rem;color:var(--sub);letter-spacing:6px;margin-top:.5rem;animation:fadeUp .8s .3s both}
+.splash-bar{width:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--accent));border-radius:2px;margin-top:2rem;animation:bar 2.2s ease forwards}
+.splash-years{font-size:3.5rem;font-weight:900;color:var(--accent);margin-top:1.5rem;animation:countUp 2s ease forwards}
+@keyframes pulse{from{text-shadow:0 0 20px rgba(245,166,35,.4)}to{text-shadow:0 0 50px rgba(245,166,35,.9)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bar{to{width:260px}}
+@keyframes countUp{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;background:rgba(10,10,15,.92);backdrop-filter:blur(14px);border-bottom:1px solid rgba(245,166,35,.15)}
+.nav-logo{font-size:1.4rem;font-weight:900;color:var(--gold);letter-spacing:2px}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--sub);text-decoration:none;font-weight:600;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+
+/* ── HERO ── */
+.hero{min-height:90vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:4rem 2rem;background:radial-gradient(ellipse at 50% 0%,rgba(245,166,35,.12) 0%,transparent 70%)}
+.hero-badge{display:inline-block;padding:.35rem 1.2rem;background:rgba(245,166,35,.1);border:1px solid rgba(245,166,35,.3);border-radius:50px;font-size:.8rem;letter-spacing:3px;color:var(--gold);margin-bottom:1.5rem;animation:fadeUp .6s both}
+.hero h1{font-size:clamp(2.5rem,7vw,5.5rem);font-weight:900;line-height:1.1;animation:fadeUp .7s .15s both}
+.hero h1 span{color:var(--gold)}
+.hero p{max-width:580px;color:var(--sub);font-size:1.1rem;margin:1.2rem auto 2rem;animation:fadeUp .7s .3s both}
+.btn-group{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;animation:fadeUp .7s .45s both}
+.btn{padding:.85rem 2rem;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;border:none;transition:transform .2s,box-shadow .2s}
+.btn-gold{background:linear-gradient(135deg,var(--gold),#e08800);color:#000}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(245,166,35,.4)}
+.btn-outline{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+.btn-outline:hover{background:rgba(245,166,35,.1);transform:translateY(-3px)}
+
+/* ── STATS BAR ── */
+.stats{display:flex;gap:0;flex-wrap:wrap;justify-content:center;background:var(--card);border-top:1px solid rgba(245,166,35,.1);border-bottom:1px solid rgba(245,166,35,.1)}
+.stat{flex:1;min-width:180px;padding:2rem 1rem;text-align:center;border-right:1px solid rgba(255,255,255,.06)}
+.stat:last-child{border-right:none}
+.stat-num{font-size:2.5rem;font-weight:900;color:var(--gold)}
+.stat-label{color:var(--sub);font-size:.85rem;margin-top:.3rem;letter-spacing:1px}
+
+/* ── LIVE STATUS ── */
+.section{padding:5rem 2rem;max-width:1100px;margin:0 auto}
+.section-title{font-size:2rem;font-weight:900;margin-bottom:.5rem}
+.section-title span{color:var(--gold)}
+.section-sub{color:var(--sub);margin-bottom:2.5rem;font-size:1rem}
+
+.live-panel{background:var(--card);border:1px solid rgba(245,166,35,.15);border-radius:20px;padding:2.5rem;display:flex;gap:2.5rem;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.live-dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:#22e55c;margin-right:8px;animation:blink 1.2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.live-count{font-size:5rem;font-weight:900;color:var(--gold);line-height:1}
+.live-label{color:var(--sub);font-size:.9rem;margin-top:.3rem}
+.availability{padding:1rem 1.8rem;border-radius:12px;font-weight:700;font-size:1rem}
+.avail-open{background:rgba(34,229,92,.1);border:1px solid #22e55c;color:#22e55c}
+.avail-busy{background:rgba(255,107,53,.1);border:1px solid var(--accent);color:var(--accent)}
+
+/* ── APPOINTMENT FORM ── */
+.form-card{background:var(--card);border:1px solid rgba(245,166,35,.15);border-radius:20px;padding:3rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:.5rem}
+.form-group label{font-size:.85rem;color:var(--sub);letter-spacing:1px;font-weight:600}
+.form-group input,.form-group select,.form-group textarea{background:#1c1c2e;border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.85rem 1rem;color:var(--text);font-family:'Outfit',sans-serif;font-size:.95rem;transition:border .3s,box-shadow .3s;width:100%}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,166,35,.15)}
+.form-group select option{background:#1c1c2e}
+.form-span{grid-column:1/-1}
+.wait-warning{display:none;background:rgba(255,107,53,.1);border:1px solid var(--accent);border-radius:12px;padding:1.2rem 1.5rem;color:var(--accent);font-weight:600;margin-top:1rem;animation:fadeUp .4s both}
+.submit-btn{width:100%;margin-top:1.5rem;padding:1.1rem;font-size:1.1rem}
+
+/* ── NOTIFICATION TOAST ── */
+#toast{position:fixed;bottom:2rem;right:2rem;z-index:9999;background:linear-gradient(135deg,#1c1c2e,#13131f);border:1px solid var(--gold);border-radius:14px;padding:1.2rem 1.8rem;min-width:280px;display:none;animation:slideIn .4s ease}
+#toast .t-title{font-weight:700;color:var(--gold);margin-bottom:.3rem}
+#toast .t-body{color:var(--sub);font-size:.9rem}
+@keyframes slideIn{from{transform:translateX(120%)}to{transform:translateX(0)}}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.svc-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:2rem 1.5rem;transition:transform .3s,border-color .3s}
+.svc-card:hover{transform:translateY(-6px);border-color:rgba(245,166,35,.4)}
+.svc-icon{font-size:2.5rem;margin-bottom:1rem}
+.svc-name{font-weight:700;font-size:1.1rem;margin-bottom:.5rem}
+.svc-desc{color:var(--sub);font-size:.9rem;line-height:1.6}
+
+/* ── WHY US ── */
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+.why-card{background:var(--card);border:1px solid rgba(245,166,35,.1);border-radius:16px;padding:2rem 1.5rem;text-align:center;transition:box-shadow .3s}
+.why-card:hover{box-shadow:0 8px 40px rgba(245,166,35,.15)}
+.why-num{font-size:2.8rem;font-weight:900;color:var(--gold)}
+.why-label{color:var(--sub);font-size:.9rem;margin-top:.3rem}
+
+/* ── CONTACT ── */
+.contact-bar{background:var(--card);border:1px solid rgba(245,166,35,.15);border-radius:20px;padding:2.5rem 3rem;display:flex;gap:3rem;flex-wrap:wrap;align-items:center;justify-content:space-around}
+.contact-item{display:flex;align-items:center;gap:1rem}
+.contact-icon{font-size:2rem;background:rgba(245,166,35,.1);padding:.8rem;border-radius:12px}
+.contact-info h4{font-weight:700;margin-bottom:.2rem}
+.contact-info p{color:var(--sub);font-size:.9rem}
+
+/* ── FOOTER ── */
+footer{text-align:center;padding:2.5rem;border-top:1px solid rgba(255,255,255,.06);color:var(--sub);font-size:.85rem;margin-top:3rem}
+footer span{color:var(--gold)}
+
+/* ── FLOATING CARS ── */
+.floating-car{position:fixed;bottom:-80px;font-size:3rem;animation:driveCar linear infinite;opacity:.08;pointer-events:none;z-index:0}
+@keyframes driveCar{0%{left:-10%;bottom:8%}100%{left:110%;bottom:8%}}
+</style>
+</head>
+<body>
+
+<!-- Floating decorative cars -->
+<div class="floating-car" style="animation-duration:18s;animation-delay:0s">🚗</div>
+<div class="floating-car" style="animation-duration:25s;animation-delay:8s;bottom:15%!important;font-size:2rem">🚙</div>
+<div class="floating-car" style="animation-duration:20s;animation-delay:14s;bottom:5%!important">🏎️</div>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <div class="splash-logo">⚙️ AJAY AUTO</div>
+  <div class="splash-tagline">GARAGE & SERVICE CENTER</div>
+  <div class="splash-bar"></div>
+  <div class="splash-years" id="splashYears">15+</div>
+  <div style="color:var(--sub);font-size:.9rem;margin-top:.5rem;letter-spacing:3px;animation:fadeUp 1s 1s both">YEARS OF LEGACY</div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">⚙️ AJAY AUTO</div>
+  <ul class="nav-links">
+    <li><a href="#status">Live Status</a></li>
+    <li><a href="#appointment">Book</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🏆 BEST IN FIELD · SINCE 2009</div>
+  <h1>Your Vehicle Deserves<br><span>Expert Hands</span></h1>
+  <p>Ajay Auto Garage — 15+ years of trusted vehicle repair, maintenance & restoration. We treat every car like our own.</p>
+  <div class="btn-group">
+    <button class="btn btn-gold" onclick="scrollTo('#appointment')">Book Appointment</button>
+    <button class="btn btn-outline" onclick="scrollTo('#status')">Check Availability</button>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">15+</div><div class="stat-label">YEARS EXPERIENCE</div></div>
+  <div class="stat"><div class="stat-num" id="totalServed">2,400+</div><div class="stat-label">CARS SERVICED</div></div>
+  <div class="stat"><div class="stat-num">98%</div><div class="stat-label">HAPPY CUSTOMERS</div></div>
+  <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">SUPPORT AVAILABLE</div></div>
+</div>
+
+<!-- LIVE STATUS -->
+<div class="section" id="status">
+  <div class="section-title">🔴 <span>Live</span> Garage Status</div>
+  <div class="section-sub">Real-time view of what's happening in our garage right now</div>
+  <div class="live-panel">
+    <div>
+      <div style="margin-bottom:1rem"><span class="live-dot"></span><span style="color:var(--sub);font-size:.9rem;letter-spacing:2px">LIVE UPDATE</span></div>
+      <div class="live-count" id="carsCount">5</div>
+      <div class="live-label">Cars Currently Being Worked On</div>
+    </div>
+    <div>
+      <div class="live-count" style="font-size:3rem" id="apptCount">0</div>
+      <div class="live-label">Pending Appointments</div>
+    </div>
+    <div id="availBadge" class="availability avail-open">✅ Available – Book Now</div>
+  </div>
+  <div style="margin-top:1rem;color:var(--sub);font-size:.85rem;padding-left:.5rem">⏱ Car count updates every 30 seconds automatically</div>
+</div>
+
+<!-- APPOINTMENT -->
+<div class="section" id="appointment">
+  <div class="section-title">📅 Book an <span>Appointment</span></div>
+  <div class="section-sub">Fill in your details and we'll confirm your slot</div>
+  <div class="form-card">
+    <form id="apptForm" onsubmit="submitForm(event)">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>YOUR NAME *</label>
+          <input type="text" id="fName" placeholder="e.g. Rahul Sharma" required>
+        </div>
+        <div class="form-group">
+          <label>CONTACT NUMBER *</label>
+          <input type="tel" id="fPhone" placeholder="+91 98765 43210" required>
+        </div>
+        <div class="form-group">
+          <label>CAR BRAND *</label>
+          <select id="fBrand" required>
+            <option value="">— Select Your Car Brand —</option>
+            <optgroup label="⭐ Our Recommended Specialists">
+              <option value="Maruti Suzuki">Maruti Suzuki</option>
+              <option value="Hyundai">Hyundai</option>
+              <option value="Tata">Tata Motors</option>
+              <option value="Honda">Honda</option>
+              <option value="Toyota">Toyota</option>
+            </optgroup>
+            <optgroup label="Other Brands">
+              <option value="Mahindra">Mahindra</option>
+              <option value="Kia">Kia</option>
+              <option value="Ford">Ford</option>
+              <option value="Renault">Renault</option>
+              <option value="Volkswagen">Volkswagen</option>
+              <option value="Skoda">Skoda</option>
+              <option value="MG">MG Motor</option>
+              <option value="Other">Other</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>PREFERRED DATE</label>
+          <input type="date" id="fDate">
+        </div>
+        <div class="form-group form-span">
+          <label>DESCRIBE THE ISSUE</label>
+          <textarea id="fIssue" rows="3" placeholder="e.g. Engine noise, AC not working, oil change..."></textarea>
+        </div>
+      </div>
+      <div class="wait-warning" id="waitWarning">
+        ⚠️ High Demand Alert: We currently have 10+ appointments. Your vehicle may take an additional <strong id="extraDays"></strong> days (3–4 days extra). We appreciate your patience!
+      </div>
+      <button type="submit" class="btn btn-gold submit-btn">🔧 Confirm Appointment</button>
+    </form>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="section" id="services">
+  <div class="section-title">🛠️ Our <span>Services</span></div>
+  <div class="section-sub">Comprehensive vehicle care under one roof</div>
+  <div class="services-grid">
+    <div class="svc-card"><div class="svc-icon">🔧</div><div class="svc-name">Engine Repair</div><div class="svc-desc">Full engine diagnostics, overhaul, and precision repair by certified mechanics.</div></div>
+    <div class="svc-card"><div class="svc-icon">❄️</div><div class="svc-name">AC Service</div><div class="svc-desc">AC gas refill, compressor repair, and cooling system tune-up.</div></div>
+    <div class="svc-card"><div class="svc-icon">🛞</div><div class="svc-name">Tyre & Wheel</div><div class="svc-desc">Tyre replacement, balancing, wheel alignment and puncture repair.</div></div>
+    <div class="svc-card"><div class="svc-icon">🔋</div><div class="svc-name">Battery & Electrical</div><div class="svc-desc">Battery testing, replacement, and full electrical diagnostics.</div></div>
+    <div class="svc-card"><div class="svc-icon">🎨</div><div class="svc-name">Denting & Painting</div><div class="svc-desc">Scratch removal, panel beating, and showroom-finish paint jobs.</div></div>
+    <div class="svc-card"><div class="svc-icon">🛢️</div><div class="svc-name">Oil & Fluids</div><div class="svc-desc">Engine oil change, brake fluid, coolant, and all lubrication services.</div></div>
+  </div>
+</div>
+
+<!-- WHY US -->
+<div class="section">
+  <div class="section-title">💪 Why <span>Choose Us?</span></div>
+  <div class="section-sub">Numbers that speak for our reputation</div>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-num">15+</div><div class="why-label">Years in Business</div></div>
+    <div class="why-card"><div class="why-num">50+</div><div class="why-label">Car Brands Handled</div></div>
+    <div class="why-card"><div class="why-num">10</div><div class="why-label">Expert Mechanics</div></div>
+    <div class="why-card"><div class="why-num">4.9★</div><div class="why-label">Average Rating</div></div>
+    <div class="why-card"><div class="why-num">1-Day</div><div class="why-label">Average Turnaround</div></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="section" id="contact">
+  <div class="section-title">📞 <span>Contact</span> Us</div>
+  <div class="section-sub">We're always here to help. Walk in or call anytime.</div>
+  <div class="contact-bar">
+    <div class="contact-item">
+      <div class="contact-icon">📞</div>
+      <div class="contact-info"><h4>Call Us</h4><p>+91 98765 43210<br>+91 91234 56789</p></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">📍</div>
+      <div class="contact-info"><h4>Location</h4><p>Shop No. 12, Main Market Road<br>Near Bus Stand, Your City</p></div>
+    </div>
+    <div class="contact-item">
+      <div class="contact-icon">🕐</div>
+      <div class="contact-info"><h4>Working Hours</h4><p>Mon – Sat: 8:00 AM – 8:00 PM<br>Sunday: 9:00 AM – 3:00 PM</p></div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-size:1.5rem;font-weight:900;color:var(--gold);margin-bottom:.5rem">⚙️ AJAY AUTO GARAGE</div>
+  <p>© 2024 Ajay Auto Garage. Serving with <span>❤️</span> since <span>2009</span>.</p>
+  <p style="margin-top:.5rem">Best Vehicle Service Center · 15+ Years of Trust</p>
+</footer>
+
+<!-- TOAST -->
+<div id="toast">
+  <div class="t-title">🔔 New Appointment Received!</div>
+  <div class="t-body" id="toastBody">Loading...</div>
+</div>
+
+<script>
+// Splash screen
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('splash').classList.add('hide')},2800);
+});
+
+// Smooth scroll
+function scrollTo(id){document.querySelector(id).scrollIntoView({behavior:'smooth'})}
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();scrollTo(a.getAttribute('href'))})});
+
+// Live car count (always at least 3, random between 3-8)
+let appointments = parseInt(localStorage.getItem('ajayAppts')||'0');
+function randomCars(){return Math.floor(Math.random()*6)+3}
+let currentCars = randomCars();
+
+function updateStatus(){
+  document.getElementById('carsCount').textContent=currentCars;
+  document.getElementById('apptCount').textContent=appointments;
+  const badge=document.getElementById('availBadge');
+  if(appointments>=10){
+    badge.className='availability avail-busy';
+    badge.textContent='⚠️ Busy – Slight Delay Expected';
+  } else {
+    badge.className='availability avail-open';
+    badge.textContent='✅ Available – Book Now';
+  }
+  // update warning in form too
+  const warn=document.getElementById('waitWarning');
+  if(appointments>=10){
+    const days=Math.floor(Math.random()*2)+3;
+    document.getElementById('extraDays').textContent=days;
+    warn.style.display='block';
+  } else {
+    warn.style.display='none';
+  }
+}
+updateStatus();
+
+// Simulate live car count change every 30s
+setInterval(()=>{
+  currentCars=Math.max(3,currentCars+Math.floor(Math.random()*3)-1);
+  if(currentCars>9)currentCars=randomCars();
+  updateStatus();
+},30000);
+
+// Set min date on date picker
+const dateInput=document.getElementById('fDate');
+const today=new Date().toISOString().split('T')[0];
+dateInput.min=today;
+
+// Submit appointment
+function submitForm(e){
+  e.preventDefault();
+  const name=document.getElementById('fName').value.trim();
+  const phone=document.getElementById('fPhone').value.trim();
+  const brand=document.getElementById('fBrand').value;
+  const date=document.getElementById('fDate').value;
+  const issue=document.getElementById('fIssue').value.trim();
+
+  if(!name||!phone||!brand){alert('Please fill in all required fields.');return;}
+
+  appointments++;
+  localStorage.setItem('ajayAppts',appointments);
+  updateStatus();
+
+  // Show toast notification
+  const toast=document.getElementById('toast');
+  document.getElementById('toastBody').textContent=`${name} | ${phone} | ${brand}${date?' | '+date:''}`;
+  toast.style.display='block';
+  setTimeout(()=>{toast.style.display='none'},5000);
+
+  // Request browser notification permission
+  if('Notification' in window){
+    Notification.requestPermission().then(p=>{
+      if(p==='granted'){
+        new Notification('Ajay Auto Garage – New Booking!',{
+          body:`${name} booked for ${brand}. Contact: ${phone}`,
+          icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">⚙️</text></svg>'
+        });
+      }
+    });
+  }
+
+  // Reset form
+  document.getElementById('apptForm').reset();
+  alert(`✅ Appointment confirmed for ${name}!\nWe will contact you at ${phone} shortly.\n\nThank you for choosing Ajay Auto Garage! 🚗`);
+}
+
+// Animate numbers on scroll
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.style.transform='translateY(0)';
+      entry.target.style.opacity='1';
+    }
+  });
+},{threshold:.1});
+document.querySelectorAll('.svc-card,.why-card,.stat').forEach(el=>{
+  el.style.transform='translateY(30px)';
+  el.style.opacity='0';
+  el.style.transition='transform .5s ease, opacity .5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
