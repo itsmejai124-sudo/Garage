@@ -148,6 +148,7 @@ footer span{color:var(--gold)}
 <!-- HERO -->
 <section class="hero">
   <div class="hero-badge">🏆 BEST IN FIELD · SINCE 2009</div>
+  <div class="hero-badge" style="margin-top:-0.5rem; border-color:#fff; background:rgba(255,255,255,0.1); color:#fff;">⭐ SPECIALIST IN MERCEDES-BENZ</div>
   <h1>Your Vehicle Deserves<br><span>Expert Hands</span></h1>
   <p>Ajay Auto Garage — Serving you with 15+ years of trust. Expert vehicle repair, maintenance & restoration by Ajay Pandey.</p>
 
@@ -201,8 +202,15 @@ footer span{color:var(--gold)}
         </div>
         <div class="form-group">
           <label>CAR BRAND *</label>
-          <select id="fBrand" required>
+          <select id="fBrand" required onchange="updateModels()">
             <option value="">— Select Your Car Brand —</option>
+            <optgroup label="💎 Luxury Brands">
+              <option value="Mercedes-Benz">Mercedes-Benz</option>
+              <option value="BMW">BMW</option>
+              <option value="Audi">Audi</option>
+              <option value="Jaguar">Jaguar</option>
+              <option value="Land Rover">Land Rover</option>
+            </optgroup>
             <optgroup label="⭐ Our Recommended Specialists">
               <option value="Maruti Suzuki">Maruti Suzuki</option>
               <option value="Hyundai">Hyundai</option>
@@ -221,6 +229,22 @@ footer span{color:var(--gold)}
               <option value="Other">Other</option>
             </optgroup>
           </select>
+        </div>
+        <div class="form-group" id="modelGroup" style="display:none;">
+          <label>CAR MODEL *</label>
+          <select id="fModel" required disabled>
+            <option value="">— Select Model —</option>
+          </select>
+        </div>
+        <div class="form-group form-span">
+          <label style="display:flex; align-items:center; gap:0.5rem; cursor:pointer;">
+            <input type="checkbox" id="fPickup" onchange="togglePickup()" style="width:auto; transform:scale(1.2);"> 
+            Need Pickup & Drop Service?
+          </label>
+        </div>
+        <div class="form-group form-span" id="pickupGroup" style="display:none;">
+          <label>PICKUP LOCATION / LINK *</label>
+          <input type="text" id="fLocation" placeholder="Paste Google Maps link or enter full address">
         </div>
         <div class="form-group">
           <label>PREFERRED DATE</label>
@@ -263,6 +287,32 @@ footer span{color:var(--gold)}
     <div class="why-card"><div class="why-num">10</div><div class="why-label">Expert Mechanics</div></div>
     <div class="why-card"><div class="why-num">4.9★</div><div class="why-label">Average Rating</div></div>
     <div class="why-card"><div class="why-num">1-Day</div><div class="why-label">Average Turnaround</div></div>
+  </div>
+</div>
+
+<!-- EXPERTS -->
+<div class="section" id="experts">
+  <div class="section-title">👨‍🔧 Meet Our <span>Experts</span></div>
+  <div class="section-sub">Highly skilled professionals dedicated to your car</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div style="font-size:3.5rem;margin-bottom:0.5rem;">👨‍🔧</div>
+      <div class="svc-name">Ajay Pandey</div>
+      <div class="why-label" style="color:var(--gold);font-weight:700;">Garage Owner & Chief Mechanic</div>
+      <div class="svc-desc" style="margin-top:0.5rem;">15+ years of master-level experience handling complex engine and mechanical works.</div>
+    </div>
+    <div class="why-card">
+      <div style="font-size:3.5rem;margin-bottom:0.5rem;">⚡</div>
+      <div class="svc-name">Salim Khatib (Pappu Bhai)</div>
+      <div class="why-label" style="color:var(--gold);font-weight:700;">Senior Auto Electrician</div>
+      <div class="svc-desc" style="margin-top:0.5rem;">10+ years of expertise as a Wire Man, fixing intricate electrical & wiring issues.</div>
+    </div>
+    <div class="why-card">
+      <div style="font-size:3.5rem;margin-bottom:0.5rem;">⛽</div>
+      <div class="svc-name">Ajay Kumar</div>
+      <div class="why-label" style="color:var(--gold);font-weight:700;">CNG Specialist</div>
+      <div class="svc-desc" style="margin-top:0.5rem;">Expert in CNG kit installation, tuning, and related maintenance for optimal performance.</div>
+    </div>
   </div>
 </div>
 
@@ -355,16 +405,70 @@ const dateInput=document.getElementById('fDate');
 const today=new Date().toISOString().split('T')[0];
 dateInput.min=today;
 
+const carModels = {
+  "Maruti Suzuki": ["Swift", "Baleno", "WagonR", "Alto", "Dzire", "Ertiga", "Brezza", "Other"],
+  "Hyundai": ["Creta", "i20", "Venue", "Grand i10", "Verna", "Aura", "Other"],
+  "Tata": ["Nexon", "Punch", "Tiago", "Harrier", "Altroz", "Safari", "Other"],
+  "Honda": ["City", "Amaze", "Elevate", "Jazz", "WR-V", "Civic", "Other"],
+  "Toyota": ["Innova", "Fortuner", "Glanza", "Urban Cruiser", "Camry", "Other"],
+  "Mercedes-Benz": ["C-Class", "E-Class", "GLC", "GLE", "S-Class", "Other"],
+  "BMW": ["3 Series", "5 Series", "X1", "X3", "X5", "Other"],
+  "Audi": ["A4", "A6", "Q3", "Q5", "Q7", "Other"],
+  "Jaguar": ["XE", "XF", "F-PACE", "Other"],
+  "Land Rover": ["Range Rover Evoque", "Discovery Sport", "Range Rover Sport", "Other"],
+  "Mahindra": ["Thar", "XUV700", "Scorpio", "XUV300", "Bolero", "Other"],
+  "Kia": ["Seltos", "Sonet", "Carens", "Other"],
+  "Ford": ["EcoSport", "Endeavour", "Figo", "Other"],
+  "Renault": ["Kwid", "Kiger", "Triber", "Duster", "Other"],
+  "Volkswagen": ["Polo", "Vento", "Taigun", "Virtus", "Other"],
+  "Skoda": ["Slavia", "Kushaq", "Octavia", "Superb", "Other"],
+  "MG": ["Hector", "Astor", "Gloster", "Other"],
+  "Other": ["Other"]
+};
+
+function updateModels() {
+  const brand = document.getElementById('fBrand').value;
+  const modelSelect = document.getElementById('fModel');
+  const modelGroup = document.getElementById('modelGroup');
+  
+  modelSelect.innerHTML = '<option value="">— Select Model —</option>';
+  
+  if (brand && carModels[brand]) {
+    carModels[brand].forEach(model => {
+      const opt = document.createElement('option');
+      opt.value = model;
+      opt.textContent = model;
+      modelSelect.appendChild(opt);
+    });
+    modelSelect.disabled = false;
+    modelGroup.style.display = 'flex';
+  } else {
+    modelSelect.disabled = true;
+    modelGroup.style.display = 'none';
+  }
+}
+
+function togglePickup() {
+  const pickup = document.getElementById('fPickup').checked;
+  const locationInput = document.getElementById('fLocation');
+  document.getElementById('pickupGroup').style.display = pickup ? 'flex' : 'none';
+  if (pickup) locationInput.setAttribute('required', 'true');
+  else locationInput.removeAttribute('required');
+}
+
 // Submit appointment
 function submitForm(e){
   e.preventDefault();
   const name=document.getElementById('fName').value.trim();
   const phone=document.getElementById('fPhone').value.trim();
   const brand=document.getElementById('fBrand').value;
-  const date=document.getElementById('fDate').value;
-  const issue=document.getElementById('fIssue').value.trim();
+  const model=document.getElementById('fModel') ? document.getElementById('fModel').value : "N/A";
+  const date=document.getElementById('fDate').value || "Not specified";
+  const issue=document.getElementById('fIssue').value.trim() || "General Service";
+  const pickup=document.getElementById('fPickup') ? document.getElementById('fPickup').checked : false;
+  const location=document.getElementById('fLocation') ? document.getElementById('fLocation').value.trim() : "";
 
-  if(!name||!phone||!brand){alert('Please fill in all required fields.');return;}
+  if(!name||!phone||!brand||(pickup && !location)){alert('Please fill in all required fields.');return;}
 
   appointments++;
   localStorage.setItem('ajayAppts',appointments);
@@ -372,26 +476,35 @@ function submitForm(e){
 
   // Show toast notification
   const toast=document.getElementById('toast');
-  document.getElementById('toastBody').textContent=`Enquiry from ${name}: ${issue || 'General Service'} (${phone})`;
+  document.getElementById('toastBody').textContent=`Enquiry from ${name}: ${issue} (${phone})`;
   toast.style.display='block';
   setTimeout(()=>{toast.style.display='none'},8000);
-
 
   // Request browser notification permission
   if('Notification' in window){
     Notification.requestPermission().then(p=>{
       if(p==='granted'){
         new Notification('Ajay Auto Garage – New Booking!',{
-          body:`${name} booked for ${brand}. Contact: ${phone}`,
+          body:`${name} booked for ${brand} ${model}. Contact: ${phone}`,
           icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">⚙️</text></svg>'
         });
       }
     });
   }
 
+  // Generate WhatsApp link
+  let waText = `*New Booking Enquiry* 🚗\n\n*Name:* ${name}\n*Contact:* ${phone}\n*Vehicle:* ${brand} ${model}\n*Preferred Date:* ${date}\n*Issue:* ${issue}`;
+  if (pickup) {
+    waText += `\n\n*🚗 Pickup Requested!*\n*Location/Link:* ${location}`;
+  }
+  
+  const waUrl = `https://wa.me/917398511081?text=${encodeURIComponent(waText)}`;
+  window.open(waUrl, '_blank');
+
   // Reset form
   document.getElementById('apptForm').reset();
-  alert(`✅ Appointment confirmed for ${name}!\nWe will contact you at ${phone} shortly.\n\nThank you for choosing Ajay Auto Garage! 🚗`);
+  if(document.getElementById('fModel')) updateModels();
+  if(document.getElementById('fPickup')) togglePickup();
 }
 
 // Animate numbers on scroll
